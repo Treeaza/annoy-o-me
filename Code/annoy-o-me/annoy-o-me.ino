@@ -14,29 +14,29 @@
 // 6: 
 // 7:
 // 8:
-PROGMEM const byte SYSTEM_TOGGLES = 0b00000000;
-
-#define ST_HEARTBEAT_EN 0b00000001
-#define ST_HEARTBEAT_TYPE 0b00001110
-#define ST_RECOVERY_EN 0b00010000
+//PROGMEM const byte SYSTEM_TOGGLES = 0b00000000;
+//
+//#define ST_HEARTBEAT_EN 0b00000001
+//#define ST_HEARTBEAT_TYPE 0b00001110
+//#define ST_RECOVERY_EN 0b00010000
 
 // ^^^^^^^^^^ END PARAMETERS ^^^^^^^^^^
 
 #define BUZZER_PIN 7
-#define IR_IN_PIN 8
-#define ANALOG_IN_PIN 0
-#define IR_OUT_PIN 10
-#define DIGITAL_OUT_PIN 9
+//#define IR_IN_PIN 8
+//#define ANALOG_IN_PIN 0
+//#define IR_OUT_PIN 10
+//#define DIGITAL_OUT_PIN 9
 
-volatile bool validHeartbeat;
+//volatile bool validHeartbeat;
 
 // ---------- FUNCTION PROTOTYPES ----------
 
 void sleepSeconds(unsigned long);
 
-void interruptHeartbeatISR();
-void startHeartbeat_digitalVoltage(int, int);
-bool verifyHeartbeat_digitalVoltage(int);
+//void interruptHeartbeatISR();
+//void startHeartbeat_digitalVoltage(int, int);
+//bool verifyHeartbeat_digitalVoltage(int);
 
 // ^^^^^^^^^^ END FUNCTION PROTOTOTYPES ^^^^^^^^^^
 
@@ -52,25 +52,25 @@ void sleepSeconds(unsigned long seconds){
 // ---------- HEARTBEAT ----------
 
 // Generic heartbeat failure ISR
-void interruptHeartbeatISR(){
-  validHeartbeat = false;
-}
+//void interruptHeartbeatISR(){
+//  validHeartbeat = false;
+//}
 
 // Start digital voltage heartbeat
-void startHeartbeat_digitalVoltage(int inPin){
-  // set pinmodes and start heartbeat
-  pinMode(inPin, INPUT);
-
-  // set up interrupt
-  attachInterrupt(digitalPinToInterrupt(inPin), interruptHeartbeatISR, FALLING);
-  
-  validHeartbeat = true;
-}
-
-// Verify digital voltage heartbeat
-bool verifyHeartbeat_digitalVoltage(int inPin){
-  return digitalRead(inPin);
-}
+//void startHeartbeat_digitalVoltage(int inPin){
+//  // set pinmodes and start heartbeat
+//  pinMode(inPin, INPUT);
+//
+//  // set up interrupt
+//  attachInterrupt(digitalPinToInterrupt(inPin), interruptHeartbeatISR, FALLING);
+//  
+//  validHeartbeat = true;
+//}
+//
+//// Verify digital voltage heartbeat
+//bool verifyHeartbeat_digitalVoltage(int inPin){
+//  return digitalRead(inPin);
+//}
 
 // ^^^^^^^^^^ END HEARTBEAT ^^^^^^^^^^
 
@@ -79,11 +79,13 @@ bool verifyHeartbeat_digitalVoltage(int inPin){
 void setup(){
   pinMode(BUZZER_PIN, OUTPUT);
   delay(5000);
-  tone(BUZZER_PIN, 2000);
 }
 
 void loop(){
+  tone(BUZZER_PIN, 2000);
+  delay(500);
+  noTone(BUZZER_PIN);
+  delay(1000);
 }
 
 // ^^^^^^^^^^ END MAIN CODE ^^^^^^^^^^
-
